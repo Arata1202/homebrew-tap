@@ -1,0 +1,88 @@
+name: Update ascdir
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 3 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-ascdir
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Generate formula from the latest release
+        shell: bash
+        run: |
+          set -euo pipefail
+          release_json="$(curl -fsSL https://api.github.com/repos/Arata1202/ascdir/releases/latest)"
+          tag="$(jq -r .tag_name <<<"$release_json")"
+          version="${tag#v}"
+          base_url="https://github.com/Arata1202/ascdir/releases/download/${tag}"
+          curl -fsSL "${base_url}/checksums.txt" -o checksums.txt
+
+          checksum() {
+            awk -v asset="$1" '$2 == asset { print $1 }' checksums.txt
+          }
+
+          darwin_amd64="$(checksum "ascdir_${version}_darwin_amd64.tar.gz")"
+          darwin_arm64="$(checksum "ascdir_${version}_darwin_arm64.tar.gz")"
+          linux_amd64="$(checksum "ascdir_${version}_linux_amd64.tar.gz")"
+          linux_arm64="$(checksum "ascdir_${version}_linux_arm64.tar.gz")"
+          test -n "$darwin_amd64" && test -n "$darwin_arm64" && test -n "$linux_amd64" && test -n "$linux_arm64"
+
+          mkdir -p Formula
+          cat > Formula/ascdir.rb <<EOF
+          class Ascdir < Formula
+            desc "Manage App Store Connect text metadata as local files"
+            homepage "https://github.com/Arata1202/ascdir"
+            version "${version}"
+            license "MIT"
+
+            on_macos do
+              if Hardware::CPU.arm?
+                url "${base_url}/ascdir_${version}_darwin_arm64.tar.gz"
+                sha256 "${darwin_arm64}"
+              else
+                url "${base_url}/ascdir_${version}_darwin_amd64.tar.gz"
+                sha256 "${darwin_amd64}"
+              end
+            end
+
+            on_linux do
+              if Hardware::CPU.arm?
+                url "${base_url}/ascdir_${version}_linux_arm64.tar.gz"
+                sha256 "${linux_arm64}"
+              else
+                url "${base_url}/ascdir_${version}_linux_amd64.tar.gz"
+                sha256 "${linux_amd64}"
+              end
+            end
+
+            def install
+              bin.install "ascdir"
+            end
+
+            test do
+              assert_match version.to_s, shell_output("#{bin}/ascdir --version")
+            end
+          end
+          EOF
+      - name: Commit formula update
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "Formula is already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Formula/ascdir.rb
+          git commit -m "ascdir: update to $(sed -n 's/.*version \"\(.*\)\"/\1/p' Formula/ascdir.rb)"
+          git push
