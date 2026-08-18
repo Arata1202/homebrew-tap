@@ -1,26 +1,26 @@
 class Ascdir < Formula
   desc "Manage App Store Connect metadata and product-page assets as files"
   homepage "https://github.com/Arata1202/ascdir"
-  version "1.1.0"
+  version "1.1.1"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/Arata1202/ascdir/releases/download/v1.1.0/ascdir_1.1.0_darwin_arm64.tar.gz"
-      sha256 "2bd51e5898b6d4a7b84807ab07f6febf17fb72b8d1208325cf44856430fbb103"
+      url "https://github.com/Arata1202/ascdir/releases/download/v1.1.1/ascdir_1.1.1_darwin_arm64.tar.gz"
+      sha256 "b387dd70b630710765f7bfaf85cab5ace6c1d8d0e3f55a738dc1d9fcf122dcad"
     else
-      url "https://github.com/Arata1202/ascdir/releases/download/v1.1.0/ascdir_1.1.0_darwin_amd64.tar.gz"
-      sha256 "b1d45325859b23834da3d6147a3fdab72c5c31eabf27f63a00b096490c927887"
+      url "https://github.com/Arata1202/ascdir/releases/download/v1.1.1/ascdir_1.1.1_darwin_amd64.tar.gz"
+      sha256 "430fd16d81096adfc3e679847f2ed840b2aebd88e843ffdb22aaf94ec04a2a58"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
-      url "https://github.com/Arata1202/ascdir/releases/download/v1.1.0/ascdir_1.1.0_linux_arm64.tar.gz"
-      sha256 "499046b367f8977d994e81cbfbd06a1addc65954fff1889472200ce8975b3ec0"
+      url "https://github.com/Arata1202/ascdir/releases/download/v1.1.1/ascdir_1.1.1_linux_arm64.tar.gz"
+      sha256 "5b9cd9880437faab4880ac09a74861843a5da91ae31d2d6212e073589bf36e26"
     else
-      url "https://github.com/Arata1202/ascdir/releases/download/v1.1.0/ascdir_1.1.0_linux_amd64.tar.gz"
-      sha256 "84bc53d59b8ae3dde598736da8fba001d80a7abe93102baf6fbc22bbf1ca2448"
+      url "https://github.com/Arata1202/ascdir/releases/download/v1.1.1/ascdir_1.1.1_linux_amd64.tar.gz"
+      sha256 "514769049cee7078e9e2ed30d651d2d30b5d52d7ab29cebcbf878b5892b76020"
     end
   end
 
