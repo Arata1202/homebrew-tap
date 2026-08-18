@@ -1,5 +1,5 @@
 class Ascdir < Formula
-  desc "Manage App Store Connect text metadata as local files"
+  desc "Manage App Store Connect metadata and product-page assets as files"
   homepage "https://github.com/Arata1202/ascdir"
   version "1.1.0"
   license "MIT"
