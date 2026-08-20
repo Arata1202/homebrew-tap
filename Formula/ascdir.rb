@@ -1,5 +1,5 @@
 class Ascdir < Formula
-  desc "Manage App Store Connect metadata and product-page assets as files"
+  desc "Manage App Store metadata, TestFlight distribution, and releases"
   homepage "https://github.com/Arata1202/ascdir"
   version "1.1.4"
   license "MIT"
