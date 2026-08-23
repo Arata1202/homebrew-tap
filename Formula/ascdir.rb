@@ -1,6 +1,6 @@
 class Ascdir < Formula
   desc "Manage App Store metadata, TestFlight distribution, and releases"
-  homepage "https://github.com/Arata1202/ascdir"
+  homepage "https://ascdir.realunivlog.com"
   version "1.2.1"
   license "MIT"
 
