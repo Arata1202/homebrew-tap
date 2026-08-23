@@ -1,26 +1,26 @@
 class Ascdir < Formula
   desc "Manage App Store metadata, TestFlight distribution, and releases"
   homepage "https://ascdir.realunivlog.com"
-  version "1.2.1"
+  version "1.2.2"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/Arata1202/ascdir/releases/download/v1.2.1/ascdir_1.2.1_darwin_arm64.tar.gz"
-      sha256 "a870006b7004b216a76da23cfd216362d9cb705cdbf850da33ef4da573fae6eb"
+      url "https://github.com/Arata1202/ascdir/releases/download/v1.2.2/ascdir_1.2.2_darwin_arm64.tar.gz"
+      sha256 "a6870916c8df205296e2ff1a9d11081163fb291657a2d9d1aab574ea0fee4c3b"
     else
-      url "https://github.com/Arata1202/ascdir/releases/download/v1.2.1/ascdir_1.2.1_darwin_amd64.tar.gz"
-      sha256 "ae7edf9a6cace73186a9d367647cba3de826e1acfdcfa8a1ce3f02da309f6241"
+      url "https://github.com/Arata1202/ascdir/releases/download/v1.2.2/ascdir_1.2.2_darwin_amd64.tar.gz"
+      sha256 "3e8167668e0a62cdae272f668dec3eebf9b928e42fb453c6a5aecff2fa524fb4"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
-      url "https://github.com/Arata1202/ascdir/releases/download/v1.2.1/ascdir_1.2.1_linux_arm64.tar.gz"
-      sha256 "3463eb010e3bccfe31700644207df5ef6f3d6b8ed939675b099591ea903f8f03"
+      url "https://github.com/Arata1202/ascdir/releases/download/v1.2.2/ascdir_1.2.2_linux_arm64.tar.gz"
+      sha256 "45b7569f5856bf669f7cca5b8555f01c05f634cfebcd6f27783037ec9bc5fe4d"
     else
-      url "https://github.com/Arata1202/ascdir/releases/download/v1.2.1/ascdir_1.2.1_linux_amd64.tar.gz"
-      sha256 "eb8bd25aedf2db1ba7c13818a3eb1ef0348d408a5ca53982d4629f585a529b88"
+      url "https://github.com/Arata1202/ascdir/releases/download/v1.2.2/ascdir_1.2.2_linux_amd64.tar.gz"
+      sha256 "566dbee67c22b47fe233d1b05f10b5dee1cf55327f7362daa7c213bfd5a5384b"
     end
   end
 
